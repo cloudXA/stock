@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五六七法则估值系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>五六七法则估值系统</h1>
+            <p>基于ROE、负债率和市净率的股票估值工具</p>
+        </header>
+
+        <main class="main-content">
+            <section class="input-section">
+                <h2>输入参数</h2>
+                <form id="valuation-form">
+                    <div class="form-group">
+                        <label for="roe">未来6年平均ROE (%)</label>
+                        <input type="number" id="roe" name="roe" step="0.01" placeholder="请输入ROE，例如：15" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dr">未来6年平均负债率DR (%)</label>
+                        <input type="number" id="dr" name="dr" step="0.01" placeholder="请输入负债率，例如：45" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pb">最新的市净率PB</label>
+                        <input type="number" id="pb" name="pb" step="0.01" placeholder="请输入市净率，例如：2.5" required>
+                    </div>
+                    
+                    <button type="submit" class="calculate-btn">计算估值</button>
+                </form>
+            </section>
+
+            <section class="result-section">
+                <h2>计算结果</h2>
+                <div id="result" class="result-content">
+                    <p class="no-result">请输入参数并点击计算按钮</p>
+                </div>
+            </section>
+        </main>
+
+        <section class="explanation-section">
+            <h2>五六七法则说明</h2>
+            <div class="explanation-content">
+                <h3>计算公式</h3>
+                <ul>
+                    <li><strong>风险基数</strong>：根据负债率确定
+                        <ul>
+                            <li>低负债（< 50%）：5%</li>
+                            <li>中等负债（50%-70%）：6%</li>
+                            <li>高负债（> 70%）：7%</li>
+                        </ul>
+                    </li>
+                    <li><strong>风险补充</strong>：根据负债率确定
+                        <ul>
+                            <li>低负债（< 50%）：0.7</li>
+                            <li>中等负债（50%-70%）：0.6</li>
+                            <li>高负债（> 70%）：0.5</li>
+                        </ul>
+                    </li>
+                    <li><strong>目标基数PB</strong> = ROE / 风险基数</li>
+                    <li><strong>买入点BUY</strong> = 目标基数PB × 风险补充</li>
+                    <li><strong>卖出点SAL</strong> = BUY × 2</li>
+                </ul>
+                
+                <h3>使用方法</h3>
+                <p>1. 输入未来6年平均ROE（净资产收益率）</p>
+                <p>2. 输入未来6年平均负债率DR</p>
+                <p>3. 输入最新的市净率PB</p>
+                <p>4. 点击计算按钮查看结果</p>
+                <p>5. 当当前PB低于买入点时，可考虑买入；当当前PB高于卖出点时，可考虑卖出</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
